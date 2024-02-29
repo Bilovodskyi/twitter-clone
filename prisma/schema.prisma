@@ -11,17 +11,31 @@ datasource db {
   relationMode = "prisma"
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
+model Tweet {
+    id String @id @default(uuid())
+    userId String
+    content String
     createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    likes Like[]
 
-    @@index([name])
+    @@unique([createdAt, id])
+    @@index([userId])
 }
+
+model Like {
+    userId String
+    tweetId String
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    Tweet Tweet @relation(fields: [tweetId], references: [id], onDelete: Cascade)
+
+
+    @@id([userId, tweetId])
+    @@index([userId])
+    @@index([tweetId])
+}
+
 
 // Necessary for Next auth
 model Account {
@@ -55,13 +69,19 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
-    name          String?
+    name          String?   @unique
     email         String?   @unique
     emailVerified DateTime?
     image         String?
+    password String?
+    isGoogleAccount Boolean @default(true)
     accounts      Account[]
     sessions      Session[]
-    posts         Post[]
+    tweets         Tweet[]
+    likes Like[]
+    followers User[] @relation(name: "Followers")
+    follows User[] @relation(name: "Followers")
+
 }
 
 model VerificationToken {
