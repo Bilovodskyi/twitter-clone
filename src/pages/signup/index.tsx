@@ -2,15 +2,11 @@ import { Button } from "~/components/Button";
 import { SwitchLoginPageLink } from "~/components/SwitchLink";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  AuthCredentialsValidator,
-  TAuthCredentialsValidator,
-} from "~/utils/credentialsValidator";
+import { AuthCredentialsValidator } from "~/utils/credentialsValidator";
+import type { TAuthCredentialsValidator } from "~/utils/credentialsValidator";
 import { api } from "~/utils/api";
 import { toast } from "sonner";
-import { ZodError } from "zod";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 function SignUp() {
   const router = useRouter();

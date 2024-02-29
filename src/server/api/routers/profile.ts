@@ -1,10 +1,7 @@
-import { Prisma } from "@prisma/client";
-import { inferAsyncReturnType } from "@trpc/server";
 import { z } from "zod";
 import { compare, hash } from "bcrypt";
 
 import {
-  createTRPCContext,
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
@@ -137,12 +134,12 @@ export const profileRouter = createTRPCRouter({
           id: currentUserId,
         },
       });
-      if (!existingUser || existingUser.password == null) {
+      if (!existingUser?.password) {
         throw new Error("User doesn't exist");
       }
       const matchingPassword = await compare(
         currentPassword,
-        existingUser?.password,
+        existingUser.password,
       );
       if (!matchingPassword) {
         throw new Error("Wrong password");

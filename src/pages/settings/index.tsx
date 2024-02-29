@@ -6,10 +6,8 @@ import { api } from "~/utils/api";
 import { CiCircleQuestion } from "react-icons/ci";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  ChangeUserInformation,
-  TChangeUserInformation,
-} from "~/utils/credentialsValidator";
+import { ChangeUserInformation } from "~/utils/credentialsValidator";
+import type { TChangeUserInformation } from "~/utils/credentialsValidator";
 import { toast } from "sonner";
 import { UploadImageForm } from "~/components/UploadImageForm";
 import { ChangePasswordForm } from "~/components/ChangePasswordForm";

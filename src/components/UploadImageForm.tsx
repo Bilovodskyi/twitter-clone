@@ -67,7 +67,7 @@ export function UploadImageForm() {
           console.log(error);
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          void getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImage(downloadURL);
           });
         },

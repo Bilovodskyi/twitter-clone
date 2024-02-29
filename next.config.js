@@ -7,9 +7,7 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+
   images: {
     domains: ["lh3.googleusercontent.com", "firebasestorage.googleapis.com"],
   },

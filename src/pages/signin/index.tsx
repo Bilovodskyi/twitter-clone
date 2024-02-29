@@ -10,10 +10,8 @@ import { Button } from "~/components/Button";
 import { SwitchLoginPageLink } from "~/components/SwitchLink";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import {
-  AuthCredentialsValidator,
-  TAuthCredentialsValidator,
-} from "~/utils/credentialsValidator";
+import { AuthCredentialsValidator } from "~/utils/credentialsValidator";
+import type { TAuthCredentialsValidator } from "~/utils/credentialsValidator";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 

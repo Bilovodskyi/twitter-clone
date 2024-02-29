@@ -52,7 +52,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     },
   });
 
-  if (profile == null || profile.name == null) {
+  if (!profile?.name) {
     return <LoadingSpinner />;
   }
   return (
@@ -89,7 +89,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           tweets={tweets.data?.pages.flatMap((page) => page.tweets)}
           isError={tweets.isError}
           isLoading={tweets.isLoading}
-          hasMore={tweets.hasNextPage!}
+          hasMore={tweets.hasNextPage}
           fetchNewTweets={tweets.fetchNextPage}
         />
       </main>

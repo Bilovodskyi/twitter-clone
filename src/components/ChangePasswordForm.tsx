@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { CiCircleQuestion } from "react-icons/ci";
 import { toast } from "sonner";
 import { api } from "~/utils/api";
-import { ChangePassword, TChangePassword } from "~/utils/credentialsValidator";
+import { ChangePassword } from "~/utils/credentialsValidator";
+import type { TChangePassword } from "~/utils/credentialsValidator";
 import { Button } from "./Button";
 
 export function ChangePasswordForm({ profile }: ChangePasswordFormProps) {
@@ -11,7 +12,7 @@ export function ChangePasswordForm({ profile }: ChangePasswordFormProps) {
     register,
     handleSubmit,
     reset,
-    formState: { errors, touchedFields },
+    formState: { errors },
   } = useForm<TChangePassword>({
     resolver: zodResolver(ChangePassword),
     resetOptions: {

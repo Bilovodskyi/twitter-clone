@@ -1,13 +1,8 @@
 import { useSession } from "next-auth/react";
 import { Button } from "./Button";
 import { ProfileImage } from "./ProfileImage";
-import {
-  FormEvent,
-  useCallback,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import { api } from "~/utils/api";
 
 function updateTextAreaSize(textArea?: HTMLTextAreaElement) {
@@ -49,7 +44,7 @@ function Form() {
       if (session.status !== "authenticated") return null;
 
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, (oldData) => {
-        if (oldData == null || oldData.pages[0] == null) return;
+        if (!oldData?.pages[0]) return;
 
         const newCacheData = {
           ...newTweet,
@@ -57,8 +52,8 @@ function Form() {
           likedByMe: false,
           user: {
             id: session.data.user.id,
-            name: session.data.user.name || null,
-            image: session.data.user.image || null,
+            name: session.data.user.name ?? null,
+            image: session.data.user.image ?? null,
           },
         };
 
@@ -74,7 +69,7 @@ function Form() {
         };
       });
       trpcUtils.profile.getById.setData(
-        { id: session.data?.user.id! },
+        { id: session.data?.user.id },
         (oldData) => {
           if (oldData == null) return;
           return {

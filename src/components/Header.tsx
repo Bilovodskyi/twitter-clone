@@ -12,7 +12,7 @@ export function Header({ headerTitle }: { headerTitle: string }) {
     id: session.data?.user.id,
   });
 
-  if (profile == null || profile.name == null) {
+  if (!profile?.name) {
     return <LoadingSpinner />;
   }
 

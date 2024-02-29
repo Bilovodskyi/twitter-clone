@@ -31,7 +31,7 @@ export const authRouter = createTRPCRouter({
       }
 
       const hashedPassword = await hash(password, 10);
-      const newUser = await ctx.db.user.create({
+      await ctx.db.user.create({
         data: {
           email,
           name: username,
