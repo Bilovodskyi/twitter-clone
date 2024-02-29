@@ -66,8 +66,8 @@ export function UploadImageForm() {
           setError(error.message);
           console.log(error);
         },
-        async () => {
-          await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImage(downloadURL);
           });
         },
