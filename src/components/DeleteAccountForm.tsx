@@ -18,7 +18,7 @@ export function DeleteAccountForm() {
     },
     onSuccess: () => {
       toast.message("Account deleted successfully!");
-      signOut();
+      void signOut();
     },
   });
 

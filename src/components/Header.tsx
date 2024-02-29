@@ -7,8 +7,9 @@ import { LoadingSpinner } from "./LoadingSpinner";
 
 export function Header({ headerTitle }: { headerTitle: string }) {
   const session = useSession();
+  if (!session.data?.user.id) return null;
   const { data: profile } = api.profile.getById.useQuery({
-    id: session.data?.user.id!,
+    id: session.data?.user.id,
   });
 
   if (profile == null || profile.name == null) {

@@ -20,6 +20,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   id,
 }) => {
   const session = useSession();
+  if (!session.data?.user.id) return null;
   const { data: profile } = api.profile.getById.useQuery({ id });
   const tweets = api.tweet.infiniteProfileFeed.useInfiniteQuery(
     { userId: id },
@@ -39,7 +40,7 @@ const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         };
       });
       trpcUtils.profile.getById.setData(
-        { id: session.data?.user.id! },
+        { id: session.data?.user.id },
         (oldData) => {
           if (oldData == null) return;
           return {

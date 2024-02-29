@@ -17,9 +17,10 @@ import { DeleteAccountForm } from "~/components/DeleteAccountForm";
 
 function Settings() {
   const session = useSession();
+  if (!session.data?.user.id) return null;
 
   const { data: profile } = api.profile.getById.useQuery({
-    id: session.data?.user.id!,
+    id: session.data?.user.id,
   });
   const trpcUtils = api.useUtils();
   const { mutate } = api.profile.changeUsername.useMutation({
@@ -34,7 +35,7 @@ function Settings() {
     onSuccess: (username) => {
       toast.message("Username changed successfully! ");
       trpcUtils.profile.getById.setData(
-        { id: session.data?.user.id! },
+        { id: session.data?.user.id },
         (oldData) => {
           if (oldData == null) return;
           return {

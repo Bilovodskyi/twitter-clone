@@ -23,15 +23,15 @@ const MyApp: AppType<{ session: Session | null }> = ({
   const router = useRouter();
   const handleHomePage = () => {
     setNav("home");
-    router.push("/");
+    void router.push("/");
   };
   const handleSearchPage = () => {
     setNav("search");
-    router.push("/");
+    void router.push("/");
   };
   const handleMenuPage = () => {
     setNav("side");
-    router.push("/");
+    void router.push("/");
   };
   return (
     <SessionProvider session={session}>

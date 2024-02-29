@@ -7,13 +7,14 @@ import { Button } from "./Button";
 import { api } from "~/utils/api";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export function UploadImageForm() {
   const [error, setError] = useState("");
   const [file, setFile] = useState<File | undefined>(undefined);
   const [image, setImage] = useState("");
   const session = useSession();
-
+  if (!session.data?.user.id) return null;
   const trpcUtils = api.useUtils();
   const { mutate } = api.profile.uploadImage.useMutation({
     onError: (err) => {
@@ -28,7 +29,7 @@ export function UploadImageForm() {
       toast.message("Image uploaded successfully! ");
       setImage("");
       trpcUtils.profile.getById.setData(
-        { id: session.data?.user.id! },
+        { id: session.data?.user.id },
         (oldData) => {
           if (oldData == null) return;
           return {
@@ -65,8 +66,8 @@ export function UploadImageForm() {
           setError(error.message);
           console.log(error);
         },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        async () => {
+          await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             setImage(downloadURL);
           });
         },
@@ -91,7 +92,12 @@ export function UploadImageForm() {
         <div className="relative max-w-[160px] space-y-3 rounded-2xl p-4 transition-colors duration-200 hover:bg-white/5">
           {image ? (
             <div className="mx-auto h-[100px] w-[100px] overflow-hidden rounded-full">
-              <img src={image} alt="uploaded image" className="h-full w-full" />
+              <Image
+                src={image}
+                alt="uploaded image"
+                width={100}
+                height={100}
+              />
             </div>
           ) : (
             <>

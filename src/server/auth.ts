@@ -1,5 +1,4 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { verify } from "argon2";
 import { type GetServerSidePropsContext } from "next";
 import {
   getServerSession,
@@ -7,10 +6,9 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { signIn } from "next-auth/react";
+
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import { env } from "~/env";
 import { db } from "~/server/db";
 import { compare } from "bcrypt";
 

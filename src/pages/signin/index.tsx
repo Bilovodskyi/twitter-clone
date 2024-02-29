@@ -1,4 +1,7 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
 import { getServerSession } from "next-auth";
 import { getProviders, signIn } from "next-auth/react";
 import { authOptions } from "~/server/auth";
@@ -28,7 +31,7 @@ function SignIn({
   });
 
   function onSubmit({ email, password }: TAuthCredentialsValidator) {
-    signIn("credentials", { redirect: false, email, password }).then(
+    void signIn("credentials", { redirect: false, email, password }).then(
       (staff) => {
         if (staff?.status == 401) {
           toast.error("Wrong email or password!");

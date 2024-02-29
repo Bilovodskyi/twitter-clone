@@ -137,9 +137,12 @@ export const profileRouter = createTRPCRouter({
           id: currentUserId,
         },
       });
+      if (!existingUser || existingUser.password == null) {
+        throw new Error("User doesn't exist");
+      }
       const matchingPassword = await compare(
         currentPassword,
-        existingUser?.password!,
+        existingUser?.password,
       );
       if (!matchingPassword) {
         throw new Error("Wrong password");

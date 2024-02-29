@@ -18,15 +18,15 @@ export function ProfileInformation({ id }: ProfileInformationProps) {
       <div className="flex gap-6">
         <div>
           <h2 className="text-[0.9rem] text-gray-400">
-            {getPlural(profile?.tweetsCount!, "Tweet", "Tweets")}
+            {getPlural(profile?.tweetsCount || 0, "Tweet", "Tweets")}
           </h2>
-          <h3 className="text-center">{profile?.tweetsCount!}</h3>
+          <h3 className="text-center">{profile?.tweetsCount}</h3>
         </div>
         <div>
           <h2 className="text-[0.9rem] text-gray-400">
-            {getPlural(profile?.followersCount!, "Follower", "Followers")}
+            {getPlural(profile?.followersCount || 0, "Follower", "Followers")}
           </h2>
-          <h3 className="text-center">{profile?.followersCount!}</h3>
+          <h3 className="text-center">{profile?.followersCount}</h3>
         </div>
         <div>
           <h2 className="text-[0.9rem] text-gray-400">Following</h2>

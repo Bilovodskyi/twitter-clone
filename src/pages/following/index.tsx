@@ -37,6 +37,7 @@ function FollowingCard({ id }: FollowingCardProps) {
   const { data: profile } = api.profile.getById.useQuery({ id });
   const trpcUtils = api.useUtils();
   const session = useSession();
+  if (!session.data?.user.id) return null;
   const toggleFollow = api.profile.toggleFollow.useMutation({
     onSuccess: ({ addedFollow }) => {
       const countModifier = addedFollow ? 1 : -1;
@@ -49,7 +50,7 @@ function FollowingCard({ id }: FollowingCardProps) {
         };
       });
       trpcUtils.profile.getById.setData(
-        { id: session.data?.user.id! },
+        { id: session.data?.user.id },
         (oldData) => {
           if (oldData == null) return;
           return {

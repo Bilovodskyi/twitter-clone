@@ -6,7 +6,6 @@ import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { IconHoverEffect } from "./IconHoverEffect";
 import { api } from "~/utils/api";
 import { LoadingSpinner } from "./LoadingSpinner";
-import { IoCheckmarkCircleOutline } from "react-icons/io5";
 
 export function InfiniteTweetList({
   tweets,
